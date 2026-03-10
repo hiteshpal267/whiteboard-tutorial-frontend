@@ -9,12 +9,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import ProtectedRoute from "./pages/ProtectedRoute";
-
+import CanvasPage from "./pages/Canvas.js";   // ADD THIS
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+
         <Route path="/" element={<Login />} />
 
         <Route
@@ -25,11 +26,21 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        {/* ADD THIS ROUTE */}
+        <Route
+          path="/canvas/:id"
+          element={
+            <ProtectedRoute>
+              <CanvasPage />
+            </ProtectedRoute>
+          }
+        />
+
       </Routes>
     </BrowserRouter>
   );
 }
-
 
 export default App;
 
