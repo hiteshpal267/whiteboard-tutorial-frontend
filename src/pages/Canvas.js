@@ -16,7 +16,7 @@ function CanvasPage() {
       try {
         const token = localStorage.getItem("token");
 
-        const response = await fetch(`http://localhost:4030/load/${id}`, {
+        const response = await fetch(`http://localhost:4030/canvas/load/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

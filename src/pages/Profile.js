@@ -16,17 +16,17 @@ function Profile() {
       const token = localStorage.getItem("token");
 
       // Fetch profile
-      const profileResponse = await fetch("http://localhost:3030/users/profile", {
+      const profileResponse = await fetch("http://localhost:4030/users/profile", {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
 
       const profileData = await profileResponse.json();
-      setName(profileData.name);
+      setName(profileData.user.name);
 
       // Fetch canvases
-      const canvasResponse = await fetch("http://localhost:3030/canvas", {
+      const canvasResponse = await fetch("http://localhost:4030/canvas", {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -50,7 +50,7 @@ function Profile() {
 
     const token = localStorage.getItem("token");
 
-    const response = await fetch("http://localhost:3030/canvas", {
+    const response = await fetch("http://localhost:4030/canvas", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
