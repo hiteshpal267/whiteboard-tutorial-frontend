@@ -5,6 +5,7 @@ import { TOOL_ACTION_TYPES, TOOL_ITEMS } from "../../constants";
 import toolboxContext from "../../store/toolbox-context";
 
 import classes from "./index.module.css";
+import { updateCanvas } from "../../utils/api";
 
 function Board() {
   const canvasRef = useRef();
@@ -99,6 +100,7 @@ function Board() {
 
   const handleMouseUp = () => {
     boardMouseUpHandler();
+    updateCanvas(elements);
   };
 
   return (
