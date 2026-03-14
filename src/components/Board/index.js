@@ -3,7 +3,8 @@ import rough from "roughjs";
 import boardContext from "../../store/board-context";
 import { TOOL_ACTION_TYPES, TOOL_ITEMS } from "../../constants";
 import toolboxContext from "../../store/toolbox-context";
-
+import { getSvgPathFromStroke } from "../../utils/element";
+import getStroke from "perfect-freehand";
 import classes from "./index.module.css";
 import { updateCanvas } from "../../utils/api";
 
@@ -60,8 +61,12 @@ function Board() {
           roughCanvas.draw(element.roughEle);
           break;
         case TOOL_ITEMS.BRUSH:
-          context.fillStyle = element.stroke;
+         context.fillStyle = element.stroke;
           context.fill(element.path);
+          const brushPath = element.path
+            ? element.path
+            : new Path2D(getSvgPathFromStroke(getStroke(element.points)));
+          context.fill(brushPath);
           context.restore();
           break;
         case TOOL_ITEMS.TEXT:
@@ -100,7 +105,8 @@ function Board() {
 
   const handleMouseUp = () => {
     boardMouseUpHandler();
-    updateCanvas(elements);
+    const canvasId = window.location.pathname.split("/").pop();
+    updateCanvas(canvasId, elements);
   };
 
   return (

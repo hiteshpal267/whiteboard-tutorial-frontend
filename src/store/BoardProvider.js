@@ -30,7 +30,7 @@ const boardReducer = (state, action) => {
         clientY,
         clientX,
         clientY,
-        { type: state.activeToolItem, stroke, fill, size }
+        { type: state.activeToolItem, stroke, fill, size },
       );
       const prevElements = state.elements;
       return {
@@ -70,7 +70,7 @@ const boardReducer = (state, action) => {
             { x: clientX, y: clientY },
           ];
           newElements[index].path = new Path2D(
-            getSvgPathFromStroke(getStroke(newElements[index].points))
+            getSvgPathFromStroke(getStroke(newElements[index].points)),
           );
           return {
             ...state,
@@ -140,18 +140,20 @@ const boardReducer = (state, action) => {
   }
 };
 
-const initialBoardState = {
-  activeToolItem: TOOL_ITEMS.BRUSH,
-  toolActionType: TOOL_ACTION_TYPES.NONE,
-  elements: [],
-  history: [[]],
-  index: 0,
-};
+const BoardProvider = ({ children, initialCanvas }) => {
+   const initialBoardState = {
+    activeToolItem: TOOL_ITEMS.BRUSH,
+    toolActionType: TOOL_ACTION_TYPES.NONE,
+    elements: initialCanvas?.elements || [],
+    history: [initialCanvas?.elements || []],
+    index: 0,
+  };
 
-const BoardProvider = ({ children }) => {
+  console.log(initialBoardState.elements);
+
   const [boardState, dispatchBoardAction] = useReducer(
     boardReducer,
-    initialBoardState
+    initialBoardState,
   );
 
   const changeToolHandler = (tool) => {
