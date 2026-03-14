@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer } from "react";
+import React, { useCallback, useReducer, useEffect } from "react";
 
 import boardContext from "./board-context";
 import { BOARD_ACTIONS, TOOL_ACTION_TYPES, TOOL_ITEMS } from "../constants";
@@ -135,13 +135,21 @@ const boardReducer = (state, action) => {
         index: state.index + 1,
       };
     }
+    case BOARD_ACTIONS.LOAD_CANVAS: {
+      return {
+        ...state,
+        elements: action.payload,
+        history: [action.payload],
+        index: 0,
+      };
+    }
     default:
       return state;
   }
 };
 
 const BoardProvider = ({ children, initialCanvas }) => {
-   const initialBoardState = {
+  const initialBoardState = {
     activeToolItem: TOOL_ITEMS.BRUSH,
     toolActionType: TOOL_ACTION_TYPES.NONE,
     elements: initialCanvas?.elements || [],
@@ -155,6 +163,15 @@ const BoardProvider = ({ children, initialCanvas }) => {
     boardReducer,
     initialBoardState,
   );
+
+  useEffect(() => {
+    if (initialCanvas?.elements) {
+      dispatchBoardAction({
+        type: BOARD_ACTIONS.LOAD_CANVAS,
+        payload: initialCanvas.elements,
+      });
+    }
+  }, [initialCanvas]);
 
   const changeToolHandler = (tool) => {
     dispatchBoardAction({
