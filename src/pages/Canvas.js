@@ -16,7 +16,7 @@ function CanvasPage() {
       try {
         const token = localStorage.getItem("token");
 
-        const response = await fetch(`http://localhost:4030/canvas/load/${id}`, {
+        const response = await fetch(`https://white-board-backend-3.onrender.com/canvas/load/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

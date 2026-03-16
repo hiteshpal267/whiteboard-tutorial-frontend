@@ -1,6 +1,6 @@
 // call a put api to update the canvas on URL /canvas/:id
 
-const API_BASE_URL = "http://localhost:4030/canvas";
+const API_BASE_URL = "https://white-board-backend-3.onrender.com/canvas";
 
 export const updateCanvas = async (id, elements) => {
   try {

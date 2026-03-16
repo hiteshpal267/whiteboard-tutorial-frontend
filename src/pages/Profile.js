@@ -17,7 +17,7 @@ function Profile() {
 
       // Fetch profile
       const profileResponse = await fetch(
-        "http://localhost:4030/users/profile",
+        "https://white-board-backend-3.onrender.com/users/profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -29,7 +29,7 @@ function Profile() {
       setName(profileData.user.name);
 
       // Fetch canvases
-      const canvasResponse = await fetch("http://localhost:4030/canvas", {
+      const canvasResponse = await fetch("https://white-board-backend-3.onrender.com/canvas", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -50,7 +50,7 @@ function Profile() {
 
     const token = localStorage.getItem("token");
 
-    const response = await fetch("http://localhost:4030/canvas", {
+    const response = await fetch("https://white-board-backend-3.onrender.com/canvas", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +81,7 @@ function Profile() {
 
   try {
     const response = await fetch(
-      `http://localhost:4030/canvas/share/${shareCanvasId}`,
+      `https://white-board-backend-3.onrender.com/canvas/share/${shareCanvasId}`,
       {
         method: "PUT",
         headers: {
