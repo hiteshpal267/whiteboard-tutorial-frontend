@@ -55,7 +55,7 @@ function Login() {
           required
         />
 
-        <button style={styles.button}>Login</button>
+        <button type="submit" style={styles.button}>Login</button>
 
       </form>
     </div>
